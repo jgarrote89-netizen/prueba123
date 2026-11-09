@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Citas y referencias en APA 7 (demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5f8;--card:#fff;--ink:#1b2430;--muted:#5a6676;--line:#d6dce4;--accent:#1f4e79;--accent-soft:#e3ecf5;--ok:#1d6b3a;--ok-bg:#e5f3ea;--bad:#9b2c1c;--bad-bg:#fbe9e5;--warn-bg:#fff4cf;--fs:18px}
+body.hc{--bg:#000;--card:#000;--ink:#fff;--muted:#ddd;--line:#fff;--accent:#ffd400;--accent-soft:#222;--ok:#7dff9b;--ok-bg:#002a10;--bad:#ff9c8a;--bad-bg:#2a0800;--warn-bg:#3a3000}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:var(--fs);line-height:1.55}
+header{background:var(--accent);color:#fff;padding:14px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+body.hc header{color:#000}
+header h1{font-family:Fraunces,Georgia,serif;font-size:1.2em;margin:0}
+header .tools{display:flex;gap:8px;flex-wrap:wrap}
+header button{background:rgba(255,255,255,.15);color:inherit;border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:6px 10px;font:inherit;font-size:.8em;cursor:pointer}
+body.hc header button{border-color:#000;background:#fff;color:#000}
+main{max-width:840px;margin:0 auto;padding:24px 18px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:18px}
+h2{font-family:Fraunces,Georgia,serif;font-size:1.4em;margin:0 0 .4em}
+h3{margin:.2em 0 .6em;font-size:1.05em}
+p{margin:.5em 0}.muted{color:var(--muted);font-size:.88em}
+.btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:11px 20px;font:inherit;font-weight:700;cursor:pointer}
+body.hc .btn{color:#000}
+.btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+button:focus-visible,input:focus-visible{outline:3px solid #f2a900;outline-offset:2px}
+input[type=text]{font:inherit;padding:8px 10px;border:2px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.tag{display:inline-block;font-size:.72em;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:2px 8px}
+.video{aspect-ratio:16/9;background:linear-gradient(135deg,#1f4e79,#3b6e99);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;padding:20px;margin:12px 0}
+summary{cursor:pointer;color:var(--accent);font-weight:700}
+.levels{display:grid;gap:10px;margin-top:12px}
+.lvl{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.lvl .n{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;background:var(--accent-soft);color:var(--accent);flex:none}
+.lvl.done .n{background:var(--ok);color:#fff}
+.lvl .t{flex:1}.lvl .t small{display:block;color:var(--muted)}
+.progress{height:8px;background:var(--accent-soft);border-radius:8px;overflow:hidden;margin:6px 0 16px}
+.progress div{height:100%;background:var(--accent);transition:width .3s}
+.ref{padding:12px 14px;border-left:4px solid var(--accent);background:var(--bg);border-radius:6px;margin:12px 0;line-height:2}
+.ficha{background:var(--accent-soft);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:.92em}
+.opts{display:grid;gap:8px;margin:12px 0}
+.opt{text-align:left;font:inherit;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--ok);background:var(--ok-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.seg{display:inline;font:inherit;background:none;border:0;border-bottom:2px dashed var(--muted);color:var(--ink);padding:0 2px;cursor:pointer;line-height:2}
+.seg:hover{background:var(--accent-soft)}
+.seg.sel{background:var(--warn-bg)}
+.seg.right{background:var(--ok-bg)}.seg.wrong{background:var(--bad-bg)}
+.seg[disabled]{cursor:default;border-bottom-color:transparent}
+.anat{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:flex-end;padding:12px 14px;background:var(--bg);border-left:4px solid var(--accent);border-radius:6px;margin:8px 0 14px}
+.anat span{display:inline-flex;flex-direction:column}
+.anat small{font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--accent)}
+/* fichas tipo Duolingo */
+.preview{min-height:54px;line-height:2;padding:12px 14px;border:2px dashed var(--line);border-radius:10px;margin:10px 0 16px}
+.preview .hole{display:inline-block;min-width:70px;border-bottom:2px solid var(--muted);color:var(--muted);text-align:center;font-size:.85em}
+.slot{margin:0 0 14px}
+.slot .lab{font-size:.75em;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:4px}
+.tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-size:.95em;background:var(--card);color:var(--ink);border:2px solid var(--line);border-bottom-width:4px;border-radius:12px;padding:6px 12px;cursor:pointer}
+.tile:hover{border-color:var(--accent)}
+.tile.sel{border-color:var(--accent);background:var(--accent-soft)}
+.tile.right{border-color:var(--ok);background:var(--ok-bg)}
+.tile.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:2px dashed var(--line);border-radius:10px;margin:10px 0}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:620px){.bins{grid-template-columns:1fr}}
+.bin{min-height:130px;border:2px solid var(--line);border-radius:12px;padding:10px;background:var(--bg);display:flex;flex-direction:column;gap:8px}
+.binlab{font-weight:700;font-size:.9em}
+.bin.over,.gap.over,.pool.over{border-color:var(--accent);background:var(--accent-soft)}
+.dcard{background:var(--card);border:2px solid var(--line);border-bottom-width:4px;border-radius:10px;padding:8px 10px;font-size:.88em;line-height:1.45;cursor:grab}
+.chip{display:inline-block;background:var(--card);border:2px solid var(--line);border-bottom-width:4px;border-radius:999px;padding:3px 12px;cursor:grab;line-height:1.5}
+.dcard.sel,.chip.sel{border-color:var(--accent);background:var(--accent-soft)}
+.dcard.right,.chip.right{border-color:var(--ok);background:var(--ok-bg);cursor:default}
+.dcard.wrong,.chip.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.dcard:focus-visible,.chip:focus-visible,.bin:focus-visible,.gap:focus-visible{outline:3px solid #f2a900;outline-offset:2px}
+.gap{display:inline-block;min-width:170px;min-height:1.9em;border:2px dashed var(--muted);border-radius:999px;vertical-align:middle;margin:0 2px}
+.fb{border-radius:10px;padding:12px 14px;margin-top:12px}
+.fb.ok{background:var(--ok-bg);border:1px solid var(--ok)}
+.fb.bad{background:var(--bad-bg);border:1px solid var(--bad)}
+.fb.info{background:var(--accent-soft)}
+.fb strong{display:block;margin-bottom:2px}
+.fb ul{margin:.3em 0 0;padding-left:1.2em}
+.gl{font:inherit;color:var(--accent);background:none;border:0;border-bottom:1px dotted var(--accent);padding:0;cursor:help}
+#tip{position:fixed;max-width:320px;background:var(--ink);color:var(--card);padding:10px 12px;border-radius:8px;font-size:.85em;z-index:9;display:none;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.cert{border:3px double var(--accent);text-align:center;padding:28px}
+.note{font-size:.8em;color:var(--muted);text-align:center;margin:10px 18px 30px}
+.sr{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Citas y referencias en APA 7 · Taller interactivo</h1>
+  <div class="tools">
+    <button id="music" aria-pressed="false" title="Suena solo en la portada">♪ Música de portada apagada</button>
+    <button id="fontDown" aria-label="Reducir letra">A−</button>
+    <button id="fontUp" aria-label="Aumentar letra">A+</button>
+    <button id="contrast" aria-pressed="false">Alto contraste</button>
+  </div>
+</header>
+<main id="app" aria-live="polite"></main>
+<div class="sr" aria-live="assertive" id="announce"></div>
+<div id="tip" role="tooltip"></div>
+<p class="note">Demo. Los ejemplos bibliográficos son ficticios y en la versión final se reemplazan por lecturas del curso y artículos de acceso abierto verificables.<br>Recurso generado con apoyo de Claude y revisado por el docente · Licencia CC BY-NC 4.0 · Música de portada CC0 o CC BY 4.0, acreditada aparte (por definir).</p>
+
+<script>
+/* =====================================================================
+   CONTENIDO. Para adaptar el taller a otra disciplina, cambia solo esta sección.
+   ===================================================================== */
+const MISION = {
+  titulo:"Asistente de investigación",
+  texto:"Te sumaste al equipo de un proyecto arqueológico en el norte de Chile. La directora necesita que las citas y la lista de referencias del informe queden impecables en APA 7. Practica con libros y capítulos, y al final corrige los artículos citados en el informe."
+};
+const GLOSARIO = {
+  "DOI":"Código permanente que identifica un artículo en internet. Se escribe como enlace https://doi.org/…",
+  "editor":"Persona que reúne los capítulos de un libro escrito por varios autores. Se abrevia Ed. (uno) o Eds. (dos o más).",
+  "volumen":"Conjunto de números de una revista, normalmente los de un año. Va en cursiva.",
+  "et al.":"Abreviatura latina de «y otros». En la cita en el texto se usa con tres o más autores.",
+  "editorial":"Empresa o institución que publica el libro.",
+  "cita narrativa":"El apellido forma parte de la oración y el año va entre paréntesis, como en Fuentes (2019) plantea…",
+  "cita parentética":"Apellido y año van juntos entre paréntesis, normalmente al final de la idea, como en (Fuentes, 2019).",
+  "cita textual":"Copia exacta de palabras de la fuente. Va entre comillas y lleva el número de página."
+};
+const g = (t,k) => `<button class="gl" data-g="${k||t}">${t}</button>`;
+
+const SECCIONES = [
+ { titulo:"Libros", modo:"Seleccionar", desc:"Elige la opción correcta. Citas con un autor", items:[
+   {tipo:"mc", enunciado:"¿Cuál de estas referencias de libro está bien escrita?",
+    opciones:['Carla Fuentes (2019). <i>Arqueología del desierto de Atacama: Una introducción</i>. Ediciones Altiplano.',
+      'Fuentes, C. (2019). <i>Arqueología del desierto de Atacama: Una introducción</i>. Ediciones Altiplano.',
+      'Fuentes, C. (2019). Arqueología del desierto de Atacama: Una introducción. <i>Ediciones Altiplano</i>.',
+      'Fuentes, C. (2019). <i>Arqueología del desierto de Atacama: Una introducción</i>. Santiago: Ediciones Altiplano.'], ok:1,
+    por:{0:"El nombre se escribe al revés, apellido y luego inicial.",2:"La cursiva va en el título del libro, no en la editorial.",3:"APA 7 eliminó la ciudad de publicación."},
+    regla:"Apellido, Inicial. (Año). <i>Título en cursiva</i>. Editorial.", pista:"Revisa el nombre, la cursiva y el final de la referencia."},
+   {tipo:"mc", enunciado:`Vas a hacer una ${g("cita parentética")} del libro de Carla Fuentes (2019). ¿Cómo queda?`,
+    opciones:["(Fuentes 2019)","(Fuentes, 2019)","(C. Fuentes, 2019)","(Fuentes, C., 2019)"], ok:1,
+    por:{0:"Falta la coma entre apellido y año.",2:"En la cita en el texto no va la inicial.",3:"La inicial se reserva para la lista de referencias."},
+    regla:"Cita parentética, solo apellido, coma y año, como en (Fuentes, 2019).", pista:"Solo dos datos, separados por una coma."},
+   {tipo:"mc", enunciado:`¿Cuál es una ${g("cita narrativa")} correcta?`,
+    opciones:["(Fuentes, 2019) plantea que los aleros fueron lugares de paso.","Fuentes (2019) plantea que los aleros fueron lugares de paso.","Fuentes, 2019, plantea que los aleros fueron lugares de paso.","Según Fuentes, C. (2019), los aleros fueron lugares de paso."], ok:1,
+    por:{0:"Si el apellido es parte de la oración, no va dentro del paréntesis.",2:"El año va entre paréntesis.",3:"En la cita en el texto no va la inicial."},
+    regla:"En la cita narrativa el apellido es parte de la oración y el año va entre paréntesis justo después.", pista:"El apellido funciona como sujeto de la oración."},
+   {tipo:"mc", enunciado:`Copias una frase de la página 23 del libro. ¿Cómo queda la ${g("cita textual")}?`,
+    opciones:["«Los aleros fueron lugares de paso» (Fuentes, 2019).","«Los aleros fueron lugares de paso» (Fuentes, 2019, p. 23).","Los aleros fueron lugares de paso (Fuentes, 2019, p. 23).","«Los aleros fueron lugares de paso» (Fuentes, p. 23, 2019)."], ok:1,
+    por:{0:"Una cita textual debe indicar la página.",2:"Las palabras copiadas van entre comillas.",3:"El orden es apellido, año y página."},
+    regla:"Cita textual corta, entre comillas y con apellido, año y página, como en (Fuentes, 2019, p. 23).", pista:"Faltan comillas o página en casi todas las opciones."}
+ ]},
+ { titulo:"Capítulos de libro", modo:"Mover fichas", desc:"Arma referencias y citas pieza por pieza. Dos autores", items:[
+   {tipo:"tiles", enunciado:"Arma la referencia del capítulo eligiendo una ficha en cada espacio.",
+    ficha:"Capítulo de Marcela Rojas (2021), «Cerámica y vida cotidiana en el valle de Aconcagua», páginas 45 a 67, en el libro <i>Pasado y presente del Chile central</i>, editado por Paula Soto y Luis Vera. Editorial Universitaria del Sur, Santiago.",
+    slots:[
+      {lab:"Autora y año", op:["Rojas, M. (2021).","M. Rojas (2021).","Rojas, Marcela, 2021."], ok:0, por:{1:"En la lista de referencias va primero el apellido.",2:"Solo la inicial del nombre y el año entre paréntesis."}},
+      {lab:"Título del capítulo", op:["Cerámica y vida cotidiana en el valle de Aconcagua.","<i>Cerámica y vida cotidiana en el valle de Aconcagua</i>."], ok:0, por:{1:"El título del capítulo va en letra normal. La cursiva es para el libro."}},
+      {lab:"Editores", op:["En P. Soto y L. Vera (Eds.),","En Soto, P. y Vera, L. (Eds.),","En P. Soto y L. Vera,"], ok:0, por:{1:"Los nombres de los editores no se invierten.",2:"Falta indicar que son editores, (Eds.)."}},
+      {lab:"Libro y páginas", op:["<i>Pasado y presente del Chile central</i> (pp. 45–67).","Pasado y presente del Chile central (pp. 45–67).","<i>Pasado y presente del Chile central</i>, 45-67."], ok:0, por:{1:"El título del libro va en cursiva.",2:"Las páginas van entre paréntesis y con pp."}},
+      {lab:"Editorial", op:["Editorial Universitaria del Sur.","Santiago: Editorial Universitaria del Sur."], ok:0, por:{1:"APA 7 eliminó la ciudad de publicación."}}
+    ], regla:"Autor del capítulo (Año). Título del capítulo. En Editores (Eds.), <i>Título del libro</i> (pp. xx–xx). Editorial.", pista:"La cursiva va solo en el libro, y los editores se escriben con la inicial primero."},
+   {tipo:"tiles", enunciado:"Arma esta otra referencia. Tiene una sola editora.",
+    ficha:"Capítulo de Luis Vera (2016), «Pescadores del litoral central», páginas 12 a 30, en el libro <i>Arqueología costera de Chile</i>, editado por Carla Fuentes. Ediciones Altiplano.",
+    slots:[
+      {lab:"Autor y año", op:["Vera, L. (2016).","Vera, L., 2016.","L. Vera (2016)."], ok:0, por:{1:"El año va entre paréntesis.",2:"Primero el apellido y luego la inicial."}},
+      {lab:"Título del capítulo", op:["Pescadores del litoral central.","<i>Pescadores del litoral central</i>."], ok:0, por:{1:"El capítulo va en letra normal."}},
+      {lab:"Editora", op:["En C. Fuentes (Ed.),","En C. Fuentes (Eds.),","En C. Fuentes,"], ok:0, por:{1:"Con un solo editor se escribe Ed. Eds. es para dos o más.",2:"Falta indicar que es editora, (Ed.)."}},
+      {lab:"Libro, páginas y editorial", op:["<i>Arqueología costera de Chile</i> (pp. 12–30). Ediciones Altiplano.","<i>Arqueología costera de Chile</i> (pp. 12–30). <i>Ediciones Altiplano</i>."], ok:0, por:{1:"La editorial va en letra normal."}}
+    ], regla:`Un ${g("editor")} se indica con (Ed.) y dos o más con (Eds.).`, pista:"Fíjate en cuántas personas editaron el libro."},
+   {tipo:"tiles", enunciado:"Arma la cita parentética del capítulo de Marcela Rojas (2021), publicado en el libro que editaron Soto y Vera.",
+    slots:[
+      {lab:"", fijo:"Las vasijas domésticas eran mayoritarias"},
+      {lab:"Quién se cita", op:["(Rojas,","(Soto y Vera,","(Rojas, en Soto y Vera,"], ok:0, por:{1:"Se cita a quien escribió el capítulo, no a quienes editaron el libro.",2:"Los editores no aparecen en la cita en el texto."}},
+      {lab:"Año", op:["2021).","2021)","(2021))."], ok:0, por:{1:"Después del paréntesis va el punto de la oración.",2:"El año no lleva otro paréntesis."}}
+    ], regla:"En un capítulo se cita a su autor. Los editores solo aparecen en la lista de referencias.", pista:"¿Quién escribió las ideas que estás usando?"},
+   {tipo:"tiles", enunciado:"Arma la cita narrativa del libro de Paula Soto y Luis Vera publicado en 2018.",
+    slots:[
+      {lab:"Autores", op:["Soto y Vera","Soto, Vera","P. Soto y L. Vera"], ok:0, por:{1:"Con dos autores se unen con «y».",2:"En la cita en el texto no van las iniciales."}},
+      {lab:"Año", op:["(2018)","2018",", 2018"], ok:0, por:{1:"En la cita narrativa el año va entre paréntesis.",2:"En la cita narrativa no va coma antes del año."}},
+      {lab:"", fijo:"señalan que los conchales muestran ocupaciones reiteradas."}
+    ], regla:"Con dos autores se escriben siempre ambos apellidos, unidos por «y».", pista:"Solo apellidos y el año entre paréntesis."}
+ ]},
+ { titulo:"Artículos en el informe", modo:"Arrastrar y soltar", desc:"Corrige las citas y referencias del informe arqueológico. Tres o más autores", items:[
+   {tipo:"sort", enunciado:"La lista de referencias del informe tiene cuatro artículos. Arrastra cada uno a la columna que corresponde.",
+    modelo:`<div class="anat" aria-label="Referencia modelo de artículo con sus partes señaladas"><span><small>Autores y año</small>Muñoz, A., Pérez, J. y Lagos, T. (2020).</span><span><small>Título del artículo</small>Fogones y memoria: Excavaciones en un alero rocoso.</span><span><small>Revista y ${g("volumen")} (cursiva)</small><span><i>Revista de Estudios Andinos</i>, <i>12</i>(2), 101–125.</span></span><span><small>${g("DOI")}</small>https://doi.org/10.0000/rea.2020.012</span></div>`,
+    bins:[{id:"bien",lab:"✓ Bien escrita"},{id:"mal",lab:"✗ Necesita corrección"}],
+    cards:[
+      {html:"Lagos, T. y Muñoz, A. (2022). Huellas de pastoreo en la puna. <i>Revista de Estudios Andinos</i>, <i>14</i>(1), 7–29. https://doi.org/10.0000/rea.2022.014", bin:"bien", por:"Está bien escrita. Compárala con el modelo."},
+      {html:"Muñoz, A., Pérez, J. y Lagos, T. (2020). Fogones y memoria: Excavaciones en un alero rocoso. <i>Revista de Estudios Andinos</i>, <i>12</i>(2), 101–125. doi:10.0000/rea.2020.012", bin:"mal", por:"El DOI debe ir como enlace completo, https://doi.org/…"},
+      {html:"Pérez, J. (2019). <i>Arte rupestre y caminos prehispánicos</i>. <i>Revista de Estudios Andinos</i>, <i>11</i>(3), 55–80. https://doi.org/10.0000/rea.2019.011", bin:"mal", por:"El título del artículo no va en cursiva."},
+      {html:"Rojas, M., Soto, P. y Vera, L. (2021). Redes de intercambio en el valle de Aconcagua. <i>Revista de Estudios Andinos</i>, <i>13</i>(2), 40–62. https://doi.org/10.0000/rea.2021.013", bin:"bien", por:"Está bien escrita. Revista y volumen en cursiva, número en letra normal."}
+    ], regla:"<i>Revista</i>, <i>volumen</i>(número), páginas. El título del artículo va en letra normal y el DOI como enlace https://doi.org/…", pista:"Compara cada referencia con el modelo, pieza por pieza."},
+   {tipo:"gaps", enunciado:"Arrastra la cita correcta a cada hueco del párrafo del informe.",
+    texto:"Los aleros del norte fueron ocupados en forma reiterada {0}. Para Fuentes, eran «lugares de paso y no de residencia» {1}.",
+    chips:["(Muñoz et al., 2020)","(Muñoz, Pérez y Lagos, 2020)","(Fuentes, 2019, p. 23)","(Fuentes, 2019)"], ok:[0,2],
+    por:{1:`Con tres o más autores se usa ${g("et al.")} desde la primera cita.`,3:"Es una cita textual, así que necesita la página."},
+    regla:"Tres o más autores llevan et al. y una cita textual siempre lleva página.", pista:"El primer hueco es un artículo de tres autores. El segundo copia palabras exactas."},
+   {tipo:"sort", enunciado:"Un integrante del equipo pegó en el informe esta referencia que le sugirió un chatbot. Arrastra cada pregunta a la herramienta con que la respondes.",
+    ref:"Fuentes, C. y Rojas, M. (2017). <i>Cerámica temprana en Atacama</i>. <i>Revista de Estudios Andinos</i>, <i>8</i>(1), 33–58. https://doi.org/10.0000/rea.2017.008",
+    bins:[{id:"doi",lab:"🔎 Abriendo el DOI o un catálogo"},{id:"apa",lab:"📘 Con las reglas APA 7"}],
+    cards:[
+      {html:"¿El artículo existe de verdad?", bin:"doi", por:"Solo la fuente real confirma que existe. Un chatbot puede inventar referencias."},
+      {html:"¿Los autores y el año son los correctos?", bin:"doi", por:"Los datos se comparan con la publicación real."},
+      {html:"¿El título del artículo debe ir en cursiva?", bin:"apa", por:"Es una regla de formato. Aquí hay un error, el título va en letra normal."},
+      {html:"¿El DOI está escrito como enlace?", bin:"apa", por:"Es una regla de formato APA 7."}
+    ], regla:"Una referencia sugerida por IA se revisa dos veces, los datos en la fuente real y el formato con APA 7.", pista:"Pregúntate si la respuesta está en la publicación o en el manual APA."},
+   {tipo:"write", enunciado:"<span class='tag'>Escribe</span> Completa el informe con la cita parentética. La frase está en la página 105 del artículo de Muñoz, Pérez y Lagos (2020).",
+    antes:"Los fogones del alero muestran «ocupaciones breves y repetidas»", despues:".",
+    ok:["(Muñoz et al., 2020, p. 105)"],
+    regla:"Cita textual con tres o más autores, (Muñoz et al., 2020, p. 105).", pista:"Necesitas paréntesis, primer apellido, et al., año y página."}
+ ]}
+];
+const META = 0.8;
+
+/* =====================================================================
+   FUNCIONAMIENTO
+   ===================================================================== */
+const S = { nombre:"", sec:0, item:0, err:0, puntos:[], logros:[], done:false, sel:null, tiles:{}, stage:null };
+const app = document.getElementById('app');
+const say = t => { document.getElementById('announce').textContent = t; };
+const esc = s => s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const $ = id => document.getElementById(id);
+
+function portada(){
+  app.innerHTML = `<div class="card">
+    <span class="tag">Misión</span><h2>${MISION.titulo}</h2><p>${MISION.texto}</p>
+    <div class="video" role="img" aria-label="Espacio para el video introductorio"><div><div style="font-size:2.4em" aria-hidden="true">▶</div><b>Video. Citar y referenciar en APA 7 (4 min)</b><br><span class="muted" style="color:#dfe8f2">Aquí irá el video con subtítulos</span></div></div>
+    <details><summary>Leer la transcripción del video</summary><p class="muted">Citar es reconocer de quién son las ideas que usas y permitir que otras personas encuentren tus fuentes. APA 7 tiene dos partes que deben coincidir, la cita dentro del texto y la lista de referencias al final.</p></details>
+    <h3 style="margin-top:16px">Las piezas de una referencia</h3>
+    <div class="anat" aria-label="Ejemplo de referencia de libro con sus partes señaladas">
+      <span><small>Autora</small>Fuentes, C.</span><span><small>Año</small>(2019).</span>
+      <span><small>Título (cursiva)</small><i>Arqueología del desierto de Atacama: Una introducción</i>.</span>
+      <span><small>${g("Editorial","editorial")}</small>Ediciones Altiplano.</span></div>
+    <p><b>Cómo funciona.</b> Son tres niveles. Primero seleccionas, luego mueves fichas y al final arrastras y sueltas para corregir el informe. Puedes arrastrar o tocar una ficha y luego su destino. Si te equivocas, lee la explicación y vuelve a intentarlo. <span class="muted">Duración estimada 30 a 40 minutos.</span></p>
+    <label for="nom"><b>Tu nombre</b> <span class="muted">(opcional, aparece solo en tu resumen final y no se guarda en ningún servidor)</span></label>
+    <div class="row" style="margin-top:6px"><input type="text" id="nom" value="${esc(S.nombre)}" placeholder="Nombre y apellido" style="flex:1;min-width:220px" autocomplete="name"><button class="btn" id="go">Empezar</button></div>
+  </div>`;
+  const go=()=>{ S.nombre=$('nom').value.trim(); parar(); mapa(); };
+  $('go').onclick=go; $('nom').onkeydown=e=>{ if(e.key==='Enter') go(); };
+}
+
+function mapa(){
+  const total=SECCIONES.length, hechos=S.logros.filter(v=>v!==undefined).length;
+  app.innerHTML = `<div class="card">
+    <h2>${S.nombre?`Hola, ${esc(S.nombre)}`:'Tu ruta de práctica'}</h2>
+    <p class="muted">${hechos} de ${total} secciones practicadas.</p>
+    <div class="progress" aria-hidden="true"><div style="width:${hechos/total*100}%"></div></div>
+    <div class="levels">${SECCIONES.map((n,i)=>{ const v=S.logros[i], d=v!==undefined, m=d;
+      return `<div class="lvl ${m?'done':''}"><div class="n" aria-hidden="true">${m?'✓':i+1}</div>
+        <div class="t"><b>${n.titulo}</b> <span class="tag">${n.modo}</span><small>${n.desc}${d?` · ${Math.round(v*100)} %`:''}</small></div>
+        <button class="btn ${d?'ghost':''}" data-s="${i}">${d?'Repetir':'Entrar'}</button></div>`;}).join('')}
+    </div>
+    <div class="row"><button class="btn ${hechos===total?'':'ghost'}" id="res">Ver mi resumen</button></div>
+  </div>`;
+  app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{ S.sec=+b.dataset.s; S.item=0; S.puntos=[]; ejercicio(); });
+  $('res').onclick=resumen;
+}
+
+function ejercicio(){
+  const N=SECCIONES[S.sec], it=N.items[S.item];
+  Object.assign(S,{err:0,done:false,sel:null,tiles:{},stage:null,pick:null});
+  app.innerHTML = `<div class="card">
+    <div class="row" style="margin-top:0;justify-content:space-between"><span class="tag">${S.sec+1} · ${N.titulo} · ${N.modo}</span><span class="muted">Ejercicio ${S.item+1} de ${N.items.length}</span></div>
+    <div class="progress" aria-hidden="true"><div style="width:${S.item/N.items.length*100}%"></div></div>
+    ${it.modelo?`<p class="muted" style="margin-bottom:0">Referencia modelo de artículo</p>${it.modelo}`:''}
+    <h3>${it.enunciado}</h3>
+    ${it.ficha?`<div class="ficha"><b>Datos de la fuente.</b> ${it.ficha}</div>`:''}
+    <div id="zona"></div><div id="fb"></div>
+    <div class="row"><button class="btn" id="check">Comprobar</button>${it.pista?'<button class="btn ghost" id="hint">Ver pista</button>':''}<button class="btn ghost" id="back">Volver al mapa</button></div>
+  </div>`;
+  $('back').onclick=mapa;
+  if($('hint')) $('hint').onclick=()=>fb('info','Pista',it.pista);
+  $('check').onclick=()=>{ if(S.done) return siguiente(); comprobar(); };
+  ({mc:renderMC,tiles:renderTiles,sort:renderSort,gaps:renderGaps,write:renderWrite})[it.tipo](it);
+}
+const item=()=>SECCIONES[S.sec].items[S.item];
+function fb(cls,titulo,html){ $('fb').innerHTML=`<div class="fb ${cls}"><strong>${cls==='ok'?'✓ ':cls==='bad'?'✗ ':''}${titulo}</strong>${html}</div>`; }
+function cerrar(ok){ S.done=true; S.puntos[S.item]= ok ? (S.err===0?1:S.err===1?.5:.25) : 0; $('check').textContent='Continuar'; say(ok?'Correcto':'Se muestra la respuesta'); }
+function fallo(titulo,html,revelar){ S.err++; if(S.err>=2 && revelar){ revelar(); return true; } fb('bad',titulo,html+(S.err<2?' <br><span class="muted">Tienes otro intento.</span>':'')); say('Incorrecto'); return false; }
+
+/* opción múltiple */
+function renderMC(it){
+  $('zona').innerHTML=`<div class="opts" role="radiogroup">${it.opciones.map((o,i)=>`<button class="opt" role="radio" aria-checked="false" data-i="${i}">${o}</button>`).join('')}</div>`;
+  $('zona').querySelectorAll('.opt').forEach(b=>b.onclick=e=>{ if(S.done||e.target.closest('.gl')) return; $('zona').querySelectorAll('.opt').forEach(x=>{x.classList.remove('sel','wrong');x.setAttribute('aria-checked','false')}); b.classList.add('sel'); b.setAttribute('aria-checked','true'); S.sel=+b.dataset.i; });
+}
+/* fichas tipo Duolingo */
+function renderTiles(it){
+  $('zona').innerHTML=`<div class="preview" id="prev" aria-live="polite"></div>${it.slots.map((s,i)=>s.fijo?'':`
+    <div class="slot"><div class="lab">${s.lab}</div><div class="tiles" role="radiogroup" aria-label="${s.lab}">${shuffle(s.op.map((o,k)=>k)).map(k=>`<button class="tile" data-s="${i}" data-k="${k}" role="radio" aria-checked="false">${s.op[k]}</button>`).join('')}</div></div>`).join('')}`;
+  $('zona').querySelectorAll('.tile').forEach(b=>b.onclick=()=>{ if(S.done) return; const s=+b.dataset.s; if(S.tiles[s]?.lock) return;
+    $('zona').querySelectorAll(`.tile[data-s="${s}"]`).forEach(x=>{x.classList.remove('sel','wrong');x.setAttribute('aria-checked','false')});
+    b.classList.add('sel'); b.setAttribute('aria-checked','true'); S.tiles[s]={k:+b.dataset.k}; vista(); });
+  vista();
+}
+function vista(){ const it=item(); $('prev').innerHTML=it.slots.map((s,i)=>s.fijo?s.fijo:(S.tiles[i]?s.op[S.tiles[i].k]:`<span class="hole">${s.lab.toLowerCase()}</span>`)).join(' '); }
+/* arrastrar y soltar, con alternativa de dos clics (elegir ficha y luego destino) */
+let drag=null;
+function hacerArrastrable(el){
+  el.draggable=true;
+  el.addEventListener('dragstart',e=>{ drag=el; e.dataTransfer.setData('text/plain',''); el.classList.add('sel'); });
+  el.addEventListener('dragend',()=>el.classList.remove('sel'));
+  el.addEventListener('click',e=>{ if(S.done||e.target.closest('.gl')) return; if(S.pick===el){ el.classList.remove('sel'); S.pick=null; return; }
+    if(S.pick) S.pick.classList.remove('sel'); S.pick=el; el.classList.add('sel'); say('Ficha elegida. Ahora elige dónde ponerla.'); });
+}
+function hacerDestino(zona, alSoltar){
+  zona.addEventListener('dragover',e=>{ e.preventDefault(); zona.classList.add('over'); });
+  zona.addEventListener('dragleave',()=>zona.classList.remove('over'));
+  zona.addEventListener('drop',e=>{ e.preventDefault(); zona.classList.remove('over'); if(drag&&!S.done){ alSoltar(drag); drag=null; } });
+  zona.addEventListener('click',e=>{ if(S.done||!S.pick||e.target.closest('.dcard,.chip')===S.pick) return; if(e.target.closest('.dcard,.chip') && zona.contains(e.target.closest('.dcard,.chip')) && zona.id!=='pool') return; alSoltar(S.pick); S.pick.classList.remove('sel'); S.pick=null; });
+}
+function renderSort(it){
+  S.pick=null;
+  $('zona').innerHTML=`${it.ref?`<div class="ref">${it.ref}</div>`:''}<div class="pool" id="pool" aria-label="Fichas por ubicar">${shuffle(it.cards.map((c,i)=>i)).map(i=>`<div class="dcard" tabindex="0" role="button" data-i="${i}">${it.cards[i].html}</div>`).join('')}</div>
+    <div class="bins">${it.bins.map(b=>`<div class="bin" id="bin-${b.id}" data-b="${b.id}" tabindex="0" role="button" aria-label="Columna ${b.lab}"><div class="binlab">${b.lab}</div></div>`).join('')}</div>`;
+  $('zona').querySelectorAll('.dcard').forEach(c=>{ hacerArrastrable(c); c.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); c.click(); } }; });
+  const mover=(dest)=>(card)=>{ dest.appendChild(card); card.classList.remove('right','wrong'); };
+  $('zona').querySelectorAll('.bin').forEach(b=>{ hacerDestino(b,mover(b)); b.onkeydown=e=>{ if((e.key==='Enter'||e.key===' ')&&S.pick){ e.preventDefault(); b.click(); } }; });
+  hacerDestino($('pool'),mover($('pool')));
+}
+function renderGaps(it){
+  S.pick=null;
+  let html=it.texto.replace(/\{(\d)\}/g,(m,i)=>`<span class="gap" data-g="${i}" tabindex="0" role="button" aria-label="Hueco ${+i+1}">&nbsp;</span>`);
+  $('zona').innerHTML=`<div class="ref">${html}</div><div class="pool" id="pool">${shuffle(it.chips.map((c,i)=>i)).map(i=>`<span class="chip" tabindex="0" role="button" data-i="${i}">${it.chips[i]}</span>`).join('')}</div>`;
+  $('zona').querySelectorAll('.chip').forEach(c=>{ hacerArrastrable(c); c.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); c.click(); } }; });
+  $('zona').querySelectorAll('.gap').forEach(gp=>{ hacerDestino(gp,chip=>{ const prev=gp.querySelector('.chip'); if(prev) $('pool').appendChild(prev); gp.innerHTML=''; gp.appendChild(chip); chip.classList.remove('right','wrong'); });
+    gp.onkeydown=e=>{ if((e.key==='Enter'||e.key===' ')&&S.pick){ e.preventDefault(); gp.click(); } }; });
+  hacerDestino($('pool'),chip=>{ const gp=chip.parentElement; $('pool').appendChild(chip); if(gp.classList.contains('gap')) gp.innerHTML='&nbsp;'; });
+}
+/* escribir la cita */
+function renderWrite(it){
+  $('zona').innerHTML=`<div class="ref">${it.antes} <input type="text" id="w" aria-label="Escribe la cita" size="26" placeholder="(Apellido…)">${it.despues}</div>`;
+  $('w').onkeydown=e=>{ if(e.key==='Enter') $('check').click(); };
+}
+const norm = s => s.normalize('NFC').toLowerCase().replace(/\s+/g,'').replace(/[–—]/g,'-');
+function diagnosticar(v){
+  const n=v.toLowerCase(), out=[];
+  if(!/^\(.*\)$/.test(v.trim())) out.push("La cita parentética va completa entre paréntesis.");
+  if(!/et al\./.test(n)) out.push("Con tres o más autores se escribe «et al.» después del primer apellido.");
+  if(/p[eé]rez|lagos/.test(n)) out.push("No escribas los otros apellidos, et al. los reemplaza.");
+  if(!/2020/.test(n)) out.push("Falta el año.");
+  if(!/p\.\s*105/.test(n)) out.push("Una cita textual lleva la página, como en p. 105.");
+  return out.length?out:["Revisa el orden y las comas, apellido et al., año, página."];
+}
+
+function comprobar(){
+  const it=item();
+  if(it.tipo==='mc'){
+    if(S.sel===null) return fb('bad','Falta tu respuesta','Elige una opción.');
+    const bs=$('zona').querySelectorAll('.opt');
+    if(S.sel===it.ok){ bs[S.sel].classList.add('right'); fb('ok',S.err?'Ahora sí':'Correcto',it.regla); return cerrar(true); }
+    bs[S.sel].classList.add('wrong');
+    fallo('Todavía no',it.por?.[S.sel]||it.pista,()=>{ bs[it.ok].classList.add('right'); fb('bad','Revisemos la regla',(it.por?.[S.sel]||'')+' '+it.regla); cerrar(false); });
+  }
+  if(it.tipo==='sort'){
+    if($('pool').querySelector('.dcard')) return fb('bad','Faltan fichas','Arrastra todas las fichas a una columna.');
+    const malos=[]; $('zona').querySelectorAll('.bin .dcard').forEach(c=>{ const cd=it.cards[+c.dataset.i], ok=c.parentElement.dataset.b===cd.bin;
+      c.classList.toggle('right',ok); c.classList.toggle('wrong',!ok); if(ok) c.draggable=false; else malos.push(`<li>${cd.por}</li>`); });
+    if(!malos.length){ fb('ok',S.err?'Ahora sí':'Todo bien ubicado',`<ul>${it.cards.map(c=>`<li>${c.por}</li>`).join('')}</ul>${it.regla}`); return cerrar(true); }
+    fallo(`${malos.length===1?'Una ficha está':malos.length+' fichas están'} en la columna equivocada`,`<ul>${malos.join('')}</ul>Mueve las que quedaron en rojo.`,()=>{
+      $('zona').querySelectorAll('.bin .dcard.wrong').forEach(c=>{ $('bin-'+it.cards[+c.dataset.i].bin).appendChild(c); c.classList.remove('wrong'); c.classList.add('right'); });
+      fb('bad','Así quedan ubicadas',`<ul>${it.cards.map(c=>`<li>${c.por}</li>`).join('')}</ul>${it.regla}`); cerrar(false); });
+  }
+  if(it.tipo==='gaps'){
+    const gs=[...$('zona').querySelectorAll('.gap')];
+    if(gs.some(x=>!x.querySelector('.chip'))) return fb('bad','Faltan citas','Pon una cita en cada hueco.');
+    const malos=[]; gs.forEach((gp,i)=>{ const c=gp.querySelector('.chip'), k=+c.dataset.i, ok=k===it.ok[i]; c.classList.toggle('right',ok); c.classList.toggle('wrong',!ok); if(!ok) malos.push(`<li>Hueco ${i+1}. ${it.por[k]||'Esa cita no corresponde aquí.'}</li>`); });
+    if(!malos.length){ fb('ok',S.err?'Ahora sí':'Párrafo correcto',it.regla); return cerrar(true); }
+    fallo('Revisa los huecos en rojo',`<ul>${malos.join('')}</ul>`,()=>{
+      gs.forEach((gp,i)=>{ const want=$('zona').querySelector(`.chip[data-i="${it.ok[i]}"]`), cur=gp.querySelector('.chip'); if(cur!==want){ if(cur) $('pool').appendChild(cur); gp.innerHTML=''; gp.appendChild(want); } want.classList.remove('wrong'); want.classList.add('right'); });
+      $('pool').querySelectorAll('.chip').forEach(c=>c.classList.remove('wrong'));
+      fb('bad','Así queda el párrafo',`<ul>${malos.join('')}</ul>${it.regla}`); cerrar(false); });
+  }
+  if(it.tipo==='tiles'){
+    const faltan=it.slots.some((s,i)=>!s.fijo&&!S.tiles[i]);
+    if(faltan) return fb('bad','Faltan fichas','Elige una ficha en cada espacio.');
+    const malos=[]; it.slots.forEach((s,i)=>{ if(s.fijo) return; const b=$('zona').querySelector(`.tile[data-s="${i}"][data-k="${S.tiles[i].k}"]`);
+      if(S.tiles[i].k===s.ok){ b.classList.add('right'); S.tiles[i].lock=true; } else { b.classList.add('wrong'); malos.push(`<li><b>${s.lab}.</b> ${s.por[S.tiles[i].k]}</li>`); } });
+    if(!malos.length){ fb('ok',S.err?'Ahora sí':'Bien armada',it.regla); return cerrar(true); }
+    fallo(`Revisa ${malos.length===1?'una ficha':malos.length+' fichas'}`,`<ul>${malos.join('')}</ul>Las fichas correctas quedaron fijas.`,()=>{
+      it.slots.forEach((s,i)=>{ if(!s.fijo){ S.tiles[i]={k:s.ok}; $('zona').querySelectorAll(`.tile[data-s="${i}"]`).forEach(x=>x.classList.toggle('right',+x.dataset.k===s.ok)); } }); vista();
+      fb('bad','Así queda la referencia correcta',`<ul>${malos.join('')}</ul>${it.regla}`); cerrar(false); });
+  }
+  if(it.tipo==='write'){
+    const v=$('w').value; if(!v.trim()) return fb('bad','Falta tu cita','Escribe la cita en el espacio.');
+    if(it.ok.some(r=>norm(r)===norm(v))){ $('w').style.borderColor='var(--ok)'; fb('ok',S.err?'Ahora sí':'Cita correcta',it.regla); return cerrar(true); }
+    $('w').style.borderColor='var(--bad)';
+    fallo('Todavía no',`<ul>${diagnosticar(v).map(x=>`<li>${x}</li>`).join('')}</ul>`,()=>{ fb('bad','La cita correcta es',`<b>${it.ok[0]}</b><br>${it.regla}`); cerrar(false); });
+  }
+}
+
+function siguiente(){
+  const N=SECCIONES[S.sec];
+  if(S.item<N.items.length-1){ S.item++; return ejercicio(); }
+  const p=S.puntos.reduce((a,b)=>a+(b||0),0)/N.items.length; S.logros[S.sec]=Math.max(S.logros[S.sec]||0,p);
+  const meta=p>=META, ult=S.sec===SECCIONES.length-1;
+  app.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:3em" aria-hidden="true">🏺</div>
+    <h2>Sección terminada</h2><p>Obtuviste <b>${Math.round(p*100)} %</b> en «${N.titulo}». La directora del proyecto revisó esta parte.</p>
+    <div class="row" style="justify-content:center"><button class="btn ghost" id="rep">Repetir sección</button><button class="btn" id="sig">${ult?'Ver mi resumen':'Siguiente sección'}</button><button class="btn ghost" id="map">Volver al mapa</button></div></div>`;
+  $('map').onclick=mapa; $('rep').onclick=()=>{ S.item=0; S.puntos=[]; ejercicio(); };
+  $('sig').onclick=()=>{ if(ult) resumen(); else { S.sec++; S.item=0; S.puntos=[]; ejercicio(); } };
+}
+
+function resumen(){
+  const fecha=new Date().toLocaleDateString('es-CL',{day:'numeric',month:'long',year:'numeric'});
+  const filas=SECCIONES.map((n,i)=>`${n.titulo} ${S.logros[i]!==undefined?Math.round(S.logros[i]*100)+' %':'sin practicar'}`);
+  app.innerHTML=`<div class="card cert"><span class="tag">Resumen de participación</span><h2 style="margin-top:10px">Citas y referencias en APA 7</h2>
+    ${S.nombre?`<p style="font-size:1.3em"><b>${esc(S.nombre)}</b></p>`:''}<p>${filas.join('<br>')}</p><p>${fecha}</p>
+    <p class="muted">Los resultados se calculan en tu navegador y no se guardan en ningún servidor. Si tu docente lo pide, toma un pantallazo de esta pantalla.</p>
+    <div class="row" style="justify-content:center"><button class="btn" id="copy">Copiar resumen</button><button class="btn ghost" id="map">Volver al mapa</button></div><div id="cmsg" class="muted" aria-live="polite"></div></div>`;
+  $('map').onclick=mapa;
+  $('copy').onclick=async()=>{ const t=`Citas y referencias en APA 7 | ${S.nombre||'Sin nombre'} | ${filas.join(' | ')} | ${fecha}`; try{ await navigator.clipboard.writeText(t); $('cmsg').textContent='Resumen copiado.'; }catch(e){ $('cmsg').textContent=t; } };
+}
+
+/* glosario, accesibilidad y música */
+document.addEventListener('click',e=>{ const t=$('tip'), b=e.target.closest('.gl'); if(!b){ t.style.display='none'; return; }
+  e.preventDefault(); e.stopPropagation(); const d=GLOSARIO[b.dataset.g]; if(!d) return;
+  t.innerHTML=`<b>${b.dataset.g}</b><br>${d}`; t.style.display='block'; const r=b.getBoundingClientRect();
+  t.style.left=Math.max(8,Math.min(r.left,innerWidth-340))+'px'; t.style.top=(r.bottom+8)+'px'; say(b.dataset.g+'. '+d); },true);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') $('tip').style.display='none'; });
+let musica=false,ctx=null,osc=[];
+function sonar(){ if(!musica||!$('nom')) return; // en la versión final, aquí suena el tema CC0 o CC BY de la portada
+  try{ ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
+    [392,466.16,523.25,466.16,392,349.23,392].forEach((f,i)=>{ const o=ctx.createOscillator(),gn=ctx.createGain(),t=ctx.currentTime+i*.28; o.frequency.value=f; o.type='triangle';
+      gn.gain.setValueAtTime(.0001,t); gn.gain.exponentialRampToValueAtTime(.12,t+.03); gn.gain.exponentialRampToValueAtTime(.0001,t+.26); o.connect(gn).connect(ctx.destination); o.start(t); o.stop(t+.3); osc.push(o); }); }catch(e){} }
+function parar(){ osc.forEach(o=>{try{o.stop()}catch(e){}}); osc=[]; }
+$('music').onclick=e=>{ musica=!musica; e.target.setAttribute('aria-pressed',musica); e.target.textContent=musica?'♪ Música de portada encendida':'♪ Música de portada apagada'; musica?sonar():parar(); };
+let fs=18;
+$('fontUp').onclick=()=>{ fs=Math.min(26,fs+2); document.documentElement.style.setProperty('--fs',fs+'px'); };
+$('fontDown').onclick=()=>{ fs=Math.max(16,fs-2); document.documentElement.style.setProperty('--fs',fs+'px'); };
+$('contrast').onclick=e=>{ const on=document.body.classList.toggle('hc'); e.target.setAttribute('aria-pressed',on); };
+portada();
+</script>
+</body>
+</html>
